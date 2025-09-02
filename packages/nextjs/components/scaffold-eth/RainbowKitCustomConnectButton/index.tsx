@@ -34,11 +34,11 @@ export const RainbowKitCustomConnectButton = () => {
           const connected = mounted && account && chain;
 
           const handleConnect = () => {
-            if (targetNetwork.id === arbitrumNitro.id) {
-              setIsBurnerModalOpen(true);
-            } else {
-              openConnectModal();
-            }
+            // if (targetNetwork.id === arbitrumNitro.id) {
+            //   setIsBurnerModalOpen(true);
+            // } else {
+            openConnectModal();
+            // }
           };
 
           return (

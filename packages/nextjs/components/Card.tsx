@@ -4,8 +4,8 @@ import Link from "next/link";
 interface CardProps {
   icon: React.ReactNode;
   description: React.ReactNode;
-  linkHref: string;
-  linkText: string;
+  linkHref?: string;
+  linkText?: string;
   isDarkMode: boolean;
 }
 
@@ -19,7 +19,7 @@ export const Card: React.FC<CardProps> = ({ icon, description, linkHref, linkTex
         boxShadow: "0 0 0 3px transparent",
       }}
     >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2">
+      <div className="absolute top-0 -translate-x-1/2 left-1/2">
         <svg xmlns="http://www.w3.org/2000/svg" width="84" height="6" viewBox="0 0 84 6" fill="none">
           <path d="M41.3071 6L15.6728 6L0 0L84 0L69.02 6L41.3071 6Z" fill="#E3066E" />
         </svg>
@@ -28,10 +28,11 @@ export const Card: React.FC<CardProps> = ({ icon, description, linkHref, linkTex
       <p className="text-sm">
         {description}
         <br />
-        <Link href={linkHref} passHref className="underline underline-offset-4 font-semibold">
-          {linkText}
-        </Link>{" "}
-        tab.
+        {linkHref && (
+          <Link href={linkHref} passHref className="font-semibold underline underline-offset-4">
+            {linkText}
+          </Link>
+        )}
       </p>
     </div>
   );
