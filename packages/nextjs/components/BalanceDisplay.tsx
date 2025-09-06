@@ -1,4 +1,15 @@
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { useReadContract } from "wagmi";
+
+// ERC20 ABI - just the balanceOf function
+const ERC20_ABI = [
+  {
+    type: "function",
+    name: "balanceOf",
+    stateMutability: "view",
+    inputs: [{ name: "account", type: "address" }],
+    outputs: [{ name: "", type: "uint256" }],
+  },
+] as const;
 
 type Props = {
   address: `0x${string}`;
@@ -9,11 +20,11 @@ type Props = {
 };
 
 export const BalanceDisplay = ({ address, owner, symbol, decimals, usdPrice }: Props) => {
-  const { data: balance, isLoading } = useScaffoldReadContract({
-    contractName: "ERC20",
+  const { data: balance, isLoading } = useReadContract({
+    address: address,
+    abi: ERC20_ABI,
     functionName: "balanceOf",
     args: [owner],
-    address: address,
   });
 
   if (isLoading) {
